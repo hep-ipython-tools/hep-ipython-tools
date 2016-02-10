@@ -11,7 +11,7 @@ class CalculationQueue:
     """
     This class is a wrapper around a multiprocessing.Queue
 
-    It can be used to send and receive values from the modules while processing the path.
+    It can be used to send and receive values from the modules while processing the calculation.
     You can use it to save - for example - filepaths of outputfiles that you create on the fly.
     The added items are all of the type CalculationQueueItem.
     The CalculationQueue can be used as a dict. After the termination of the underlaying process

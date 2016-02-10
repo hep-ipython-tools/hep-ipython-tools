@@ -15,14 +15,12 @@ class IPythonHandler:
     -----
 
     Create a handler object in the beginning of your NB and use the two methods `process`
-    and `process_parameter_space` to turn a path or a path creator function into a Calculation.
+    and `process_parameter_space` to turn parameters or a parameter creator function into a Calculation.
     Do not create calculations on you own.
 
         from tracking.validation.ipython_handler import handler
 
-        path = ...
-
-        calculation = handler.process(path)
+        calculation = handler.process(parameters)
 
     """
 
@@ -44,7 +42,7 @@ class IPythonHandler:
 
     def process(self, result_queue=None, **kwargs):
         """
-        Turn a path into a Calculation that you can start, stop or whatever you want.
+        Turn a parameter set into a Calculation that you can start, stop or whatever you want.
 
         Arguments
         ---------
@@ -76,7 +74,7 @@ class IPythonHandler:
         Arguments
         ---------
         kwargs_creator_function: A function with as many input parameters as parameters you provide.
-           If the function has an additional queue parameter it is fed with the corresponding queue for this path.
+           If the function has an additional queue parameter it is fed with the corresponding queue for this calculation.
         list_of_parameters: As many lists as you want. Every list is one parameter. If you do not want a
            specific parameter constellation to occur, you can return None in your kwargs_creator_function for
            this combination.
@@ -96,11 +94,11 @@ class IPythonHandler:
         """
 
         calculation_list = calculation.CalculationList(kwargs_creator_function, kwargs)
-        all_paths, all_queues, all_parameters = calculation_list.create_all_calculations()
+        all_kwargs, all_queues, all_parameters = calculation_list.create_all_calculations()
 
         calculations = self._calculation_type()
 
-        for kwargs, q, parameters in zip(all_paths, all_queues, all_parameters):
+        for kwargs, q, parameters in zip(all_kwargs, all_queues, all_parameters):
             calculations.append(result_queue=q, log_file_name=self.next_log_file_name(),
                                 parameters=parameters, **kwargs)
 

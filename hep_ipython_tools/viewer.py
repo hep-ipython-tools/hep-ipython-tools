@@ -211,7 +211,7 @@ class StatisticsViewer(IPythonWidget):
     """
 
     def __init__(self, statistics):
-        """ Init the widget with the statistics from the basf2 process.
+        """ Init the widget with the statistics from the process.
         The statistics must be an instance of Statistics. """
         #: The statistics we want to show
         self.statistics = statistics

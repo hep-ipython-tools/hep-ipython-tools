@@ -2,7 +2,7 @@ import basf2
 
 from hep_ipython_tools.basf2 import python_modules
 from hep_ipython_tools.process import Process
-from hep_ipython_tools.statistics import Basf2CalculationQueueStatistics
+from hep_ipython_tools.entities import Basf2CalculationQueueStatistics
 
 
 class Basf2Process(Process):
