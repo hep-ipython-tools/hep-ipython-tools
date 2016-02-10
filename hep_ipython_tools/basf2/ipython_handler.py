@@ -1,6 +1,7 @@
 from hep_ipython_tools.basf2.calculation import Basf2Calculation
+from hep_ipython_tools.basf2.viewer import StylingWidget
 from hep_ipython_tools.ipython_handler import IPythonHandler
-from hep_ipython_tools.basf2.information import ModulesInformation, Basf2Information
+from hep_ipython_tools.basf2.information import Basf2ModulesInformation, Basf2Information
 
 
 class Basf2IPythonHandler(IPythonHandler):
@@ -34,7 +35,7 @@ class Basf2IPythonHandler(IPythonHandler):
         self.information = Basf2Information()
 
         #: A shortcut for returning module information
-        self.modules = ModulesInformation()
+        self.modules = Basf2ModulesInformation()
 
         # Use our own calculation type.
         self._calculation_type = Basf2Calculation
@@ -44,3 +45,11 @@ class Basf2IPythonHandler(IPythonHandler):
         Shortcut for convenience.
         """
         IPythonHandler.process(self, result_queue=result_queue, path=path)
+
+    @staticmethod
+    def style():
+        """
+        Show a nice styling :-)
+        """
+        styling_widget = StylingWidget()
+        styling_widget.show()

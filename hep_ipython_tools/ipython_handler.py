@@ -1,6 +1,7 @@
 import os
 import tempfile
-from hep_ipython_tools import viewer, calculation_queue, calculation, information, process
+
+from hep_ipython_tools import calculation_queue, calculation, information
 
 
 class IPythonHandler:
@@ -40,14 +41,6 @@ class IPythonHandler:
 
         #: The calculation type to use
         self._calculation_type = calculation.Calculation
-
-    @staticmethod
-    def style():
-        """
-        Show a nice styling :-)
-        """
-        styling_widget = viewer.StylingWidget()
-        styling_widget.show()
 
     def process(self, result_queue=None, **kwargs):
         """

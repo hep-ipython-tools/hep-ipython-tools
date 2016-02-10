@@ -1,6 +1,7 @@
 import os
 import re
 
+import hep_ipython_tools.basf2.viewer
 from hep_ipython_tools import viewer
 from hep_ipython_tools.information import EnvironmentInformation
 
@@ -26,7 +27,7 @@ class Basf2Information(EnvironmentInformation):
         self.release_folder = os.environ.get("BELLE2_LOCAL_DIR")
 
 
-class ModulesInformation:
+class Basf2ModulesInformation:
     """
     A helper class to perform module lookup.
     """
@@ -49,5 +50,5 @@ class ModulesInformation:
                 if re.search(regex_string, module_name):
                     yield module_name
 
-        v = viewer.PathViewer(filter_modules(), standalone=True)
+        v = hep_ipython_tools.basf2.viewer.PathViewer(filter_modules(), standalone=True)
         v.show()

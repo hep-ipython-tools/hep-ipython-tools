@@ -5,7 +5,8 @@ import inspect
 import time
 from abc import abstractmethod, ABCMeta
 
-from hep_ipython_tools import calculation_queue, viewer
+from hep_ipython_tools import calculation_queue
+from hep_ipython_tools import viewer
 
 
 class Calculation(metaclass=ABCMeta):
