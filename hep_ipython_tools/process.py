@@ -3,7 +3,7 @@ from abc import abstractmethod, ABCMeta
 from multiprocessing import Process, Pipe
 
 
-class HEPProcess(Process, metaclass=ABCMeta):
+class Process(Process, metaclass=ABCMeta):
     """
     Abstract base class for doing the real processing of a calculation. Is used by the handler to
     process the calculation you requested. Overload the start_process and prepare method to implement your calculation

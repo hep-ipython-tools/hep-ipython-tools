@@ -1,11 +1,9 @@
 import os
 import tempfile
-from abc import abstractmethod, ABCMeta
-
-from hep_ipython_tools import viewer, calculation_queue, calculation, information
+from hep_ipython_tools import viewer, calculation_queue, calculation, information, process
 
 
-class IPythonHandler(metaclass=ABCMeta):
+class IPythonHandler:
 
     """
     Handler class to start processes in an IPython notebook in a convenient way.
@@ -40,6 +38,9 @@ class IPythonHandler(metaclass=ABCMeta):
         #: A shortcut for returning information on the environment.
         self.information = information.EnvironmentInformation()
 
+        #: The calculation type to use
+        self._calculation_type = calculation.Calculation
+
     @staticmethod
     def style():
         """
@@ -61,10 +62,10 @@ class IPythonHandler(metaclass=ABCMeta):
         if result_queue is None:
             result_queue = calculation_queue.CalculationQueue()
 
-        created_process = self._generate_process(result_queue=result_queue,
-                                               log_file_name=self.next_log_file_name(), **kwargs)
+        calculation = self._calculation_type()
+        calculation.append(result_queue=result_queue, log_file_name=self.next_log_file_name(), **kwargs)
 
-        return calculation.Calculation([created_process])
+        return calculation
 
     def process_parameter_space(self, kwargs_creator_function, **kwargs):
         """
@@ -104,10 +105,13 @@ class IPythonHandler(metaclass=ABCMeta):
         calculation_list = calculation.CalculationList(kwargs_creator_function, kwargs)
         all_paths, all_queues, all_parameters = calculation_list.create_all_calculations()
 
-        process_list = [self._generate_process(result_queue=q, log_file_name=self.next_log_file_name(),
-                                               parameters=parameters, **kwargs)
-                        for kwargs, q, parameters in zip(all_paths, all_queues, all_parameters)]
-        return calculation.Calculation(process_list)
+        calculations = self._calculation_type()
+
+        for kwargs, q, parameters in zip(all_paths, all_queues, all_parameters):
+            calculations.append(result_queue=q, log_file_name=self.next_log_file_name(),
+                                parameters=parameters, **kwargs)
+
+        return calculations
 
     def next_log_file_name(self):
         """
@@ -136,11 +140,3 @@ class IPythonHandler(metaclass=ABCMeta):
         and write to it while processing the events.
         """
         return calculation_queue.CalculationQueue()
-
-    @abstractmethod
-    def _generate_process(self, result_queue, log_file_name, **kwargs):
-        """
-        Use this function to transform some parameters in kwargs into the real process. The returned object must be
-        an instance of HEPProcess. See basf2/ipython_handler for an example.
-        """
-        pass

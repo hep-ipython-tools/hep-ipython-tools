@@ -3,11 +3,12 @@
 
 import inspect
 import time
+from abc import abstractmethod, ABCMeta
 
 from hep_ipython_tools import calculation_queue, viewer
 
 
-class Calculation:
+class Calculation(metaclass=ABCMeta):
 
     """
     Create a Calculation from the given Process that handles
@@ -15,10 +16,13 @@ class Calculation:
     Do not create instances of this class by yourself but rather use the IPythonHandler for this.
     """
 
-    def __init__(self, process_list):
-        """ Init with the list of processes (possibly empty) """
-        #: The process list (possibly empty)
-        self.process_list = process_list
+    def __init__(self, process_list=None):
+        """ Init with an empty list of processes """
+        #: The process list (possibly empty, even later)
+        if process_list:
+            self.process_list = process_list
+        else:
+            self.process_list = []
 
     def __iter__(self):
         """
@@ -283,6 +287,13 @@ class Calculation:
 
         return self.map_on_processes(f, index)
 
+    @abstractmethod
+    def append(self, result_queue, log_file_name, parameters, kwargs):
+        """
+        Construct a new process with the given parameters and add it to the process_list.
+        """
+        pass
+
 
 class CalculationList:
 
@@ -324,5 +335,5 @@ class CalculationList:
             return self.kwargs_creator_function(**param_combination)
 
         all_calculations = [f(q, parameter_combination)
-                     for q, parameter_combination in zip(all_queues, list(every_parameter_combination_with_names))]
+                            for q, parameter_combination in zip(all_queues, list(every_parameter_combination_with_names))]
         return all_calculations, all_queues, list(every_parameter_combination_with_names)

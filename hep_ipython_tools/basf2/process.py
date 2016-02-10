@@ -1,11 +1,11 @@
 import basf2
 
 from hep_ipython_tools.basf2 import python_modules
-from hep_ipython_tools.process import HEPProcess
+from hep_ipython_tools.process import Process
 from hep_ipython_tools.statistics import Basf2CalculationQueueStatistics
 
 
-class Basf2Process(HEPProcess):
+class Basf2Process(Process):
 
     """
     Overload implementation of the HEPProcess with the correct handling of the path calculation.

@@ -1,4 +1,4 @@
-from hep_ipython_tools.basf2.process import Basf2Process
+from hep_ipython_tools.basf2.calculation import Basf2Calculation
 from hep_ipython_tools.ipython_handler import IPythonHandler
 from hep_ipython_tools.basf2.information import ModulesInformation, Basf2Information
 
@@ -28,16 +28,19 @@ class Basf2IPythonHandler(IPythonHandler):
         """
         Set the basf2 related shortcuts.
         """
-
         super().__init__()
+
         #: A shortcut for returning information on the basf2 environment.
         self.information = Basf2Information()
 
         #: A shortcut for returning module information
         self.modules = ModulesInformation()
 
-    def process(self, path, result_queue=None):
-        IPythonHandler.process(self, result_queue=result_queue, path=path)
+        # Use our own calculation type.
+        self._calculation_type = Basf2Calculation
 
-    def _generate_process(self, result_queue, log_file_name, **kwargs):
-        return Basf2Process(result_queue=result_queue, log_file_name=self.next_log_file_name(), **kwargs)
+    def process(self, path, result_queue=None):
+        """
+        Shortcut for convenience.
+        """
+        IPythonHandler.process(self, result_queue=result_queue, path=path)
