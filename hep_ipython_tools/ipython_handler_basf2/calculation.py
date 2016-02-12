@@ -1,12 +1,12 @@
 from hep_ipython_tools.calculation import Calculation
 
-from hep_ipython_tools.basf2.calculation_process import Basf2CalculationProcess
-from hep_ipython_tools.basf2 import viewer
+from hep_ipython_tools.ipython_handler_basf2.calculation_process import Basf2CalculationProcess
+from hep_ipython_tools.ipython_handler_basf2 import viewer
 
 
 class Basf2Calculation(Calculation):
     """
-    Overloaded class with more functionality which is basf2 specific:
+    Overloaded class with more functionality which is ipython_handler_basf2 specific:
       * Access the path and the module
       * Create Basf2 calculations
       * Use the Basf2 widgets
@@ -17,7 +17,7 @@ class Basf2Calculation(Calculation):
 
     def show_path(self, index=None):
         """
-        Show the underlaying basf2 path in an interactive way
+        Show the underlaying ipython_handler_basf2 path in an interactive way
         """
         def f(process):
             if process.path is not None:

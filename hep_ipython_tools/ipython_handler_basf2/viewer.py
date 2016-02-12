@@ -28,7 +28,7 @@ class StylingWidget(viewer.StylingWidget):
 class PathViewer(viewer.IPythonWidget):
 
     """
-    Viewer object for the basf2 path.
+    Viewer object for the ipython_handler_basf2 path.
     Do not use it on your own.
     """
 

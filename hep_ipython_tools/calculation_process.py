@@ -9,7 +9,7 @@ class CalculationProcess(Process, metaclass=ABCMeta):
     process the calculation you requested. Overload the start_process and prepare method to implement your calculation
     and maybe also the __init__ method if you need to store more information on your process (like what to calculate).
 
-    See basf2/calculation_process.py for an example implementation.
+    See ipython_handler_basf2/calculation_process.py for an example implementation.
     """
     def __init__(self, result_queue, log_file_name, parameters, process_kwargs, **kwargs):
         if result_queue is None:

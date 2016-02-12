@@ -7,7 +7,7 @@ class SimpleIPythonHandler(IPythonHandler):
     def __init__(self):
         super().__init__()
 
-        #: A shortcut for returning information on the basf2 environment.
+        #: A shortcut for returning information on the environment.
         self.information = SimpleInformation()
 
         # Use our own calculation type.

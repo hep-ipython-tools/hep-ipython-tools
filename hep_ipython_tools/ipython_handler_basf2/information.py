@@ -1,15 +1,15 @@
 import os
 import re
 
-import hep_ipython_tools.basf2.viewer
+import hep_ipython_tools.ipython_handler_basf2.viewer
 from hep_ipython_tools import viewer
 from hep_ipython_tools.information import EnvironmentInformation
 
 
-class Basf2Information(EnvironmentInformation):
+class Basf2EnvironmentInformation(EnvironmentInformation):
 
     """
-    Helper class for accessing the information about basf2
+    Helper class for accessing the information about ipython_handler_basf2
     from the environment variables.
     """
 
@@ -50,5 +50,5 @@ class Basf2ModulesInformation:
                 if re.search(regex_string, module_name):
                     yield module_name
 
-        v = hep_ipython_tools.basf2.viewer.PathViewer(filter_modules(), standalone=True)
+        v = hep_ipython_tools.ipython_handler_basf2.viewer.PathViewer(filter_modules(), standalone=True)
         v.show()

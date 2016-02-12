@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 
 
-from hep_ipython_tools.basf2.ipython_handler import Basf2IPythonHandler
+from hep_ipython_tools.ipython_handler_basf2.ipython_handler import Basf2IPythonHandler
 
 #: Create a single instance
 handler = Basf2IPythonHandler()

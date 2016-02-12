@@ -1,8 +1,8 @@
 import basf2
 
-from hep_ipython_tools.basf2 import python_modules
+from hep_ipython_tools.ipython_handler_basf2 import python_modules
 from hep_ipython_tools.calculation_process import CalculationProcess
-from hep_ipython_tools.entities import Basf2CalculationQueueStatistics
+from hep_ipython_tools.ipython_handler_basf2.entities import Basf2CalculationQueueStatistics
 
 
 class Basf2CalculationProcess(CalculationProcess):
@@ -66,7 +66,7 @@ class Basf2CalculationProcess(CalculationProcess):
             basf2.logging.zero_counters()
             basf2.log_to_file(file_name)
             basf2.process(self.path)
-            self.result_queue.put("basf2.statistics", Basf2CalculationQueueStatistics(basf2.statistics))
+            self.result_queue.put("ipython_handler_basf2.statistics", Basf2CalculationQueueStatistics(basf2.statistics))
         except:
             raise
         finally:

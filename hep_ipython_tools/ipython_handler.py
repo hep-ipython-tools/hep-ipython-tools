@@ -66,7 +66,7 @@ class IPythonHandler:
         created queue into the kwargs_creator_function.
         The kwargs_creator_function must return a dictionary for every combination of parameters it gets,
         which will be used to construct a Process out of it (namely, it will be fet to _generate_process).
-        See basf2/ipython_handler for an example.
+        See ipython_handler_basf2/ipython_handler for an example.
 
         Please note that a list of calculations acts the same as a single calculation you would get from
         the process function. You can handle 10 calculations the same way you would handle a single one.

@@ -1,7 +1,7 @@
-from hep_ipython_tools.basf2.calculation import Basf2Calculation
-from hep_ipython_tools.basf2.viewer import StylingWidget
+from hep_ipython_tools.ipython_handler_basf2.calculation import Basf2Calculation
+from hep_ipython_tools.ipython_handler_basf2.viewer import StylingWidget
 from hep_ipython_tools.ipython_handler import IPythonHandler
-from hep_ipython_tools.basf2.information import Basf2ModulesInformation, Basf2Information
+from hep_ipython_tools.ipython_handler_basf2.information import Basf2ModulesInformation, Basf2EnvironmentInformation
 
 
 class Basf2IPythonHandler(IPythonHandler):
@@ -27,12 +27,12 @@ class Basf2IPythonHandler(IPythonHandler):
 
     def __init__(self):
         """
-        Set the basf2 related shortcuts.
+        Set the ipython_handler_basf2 related shortcuts.
         """
         super().__init__()
 
-        #: A shortcut for returning information on the basf2 environment.
-        self.information = Basf2Information()
+        #: A shortcut for returning information on the ipython_handler_basf2 environment.
+        self.information = Basf2EnvironmentInformation()
 
         #: A shortcut for returning module information
         self.modules = Basf2ModulesInformation()
