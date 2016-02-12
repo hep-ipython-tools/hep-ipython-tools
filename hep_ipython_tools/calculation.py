@@ -329,7 +329,7 @@ class CalculationList:
         all_queues = [calculation_queue.CalculationQueue() for combination in every_parameter_combination_with_names]
 
         def f(q, param_combination):
-            args, vargs, vwargs, defaults = inspect.signature(self.kwargs_creator_function)
+            args = inspect.signature(self.kwargs_creator_function).parameters
             if "queue" in args:
                 param_combination.update({"queue": q})
 

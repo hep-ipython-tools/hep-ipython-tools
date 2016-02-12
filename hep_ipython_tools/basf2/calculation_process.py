@@ -1,11 +1,11 @@
 import basf2
 
 from hep_ipython_tools.basf2 import python_modules
-from hep_ipython_tools.process import Process
+from hep_ipython_tools.calculation_process import CalculationProcess
 from hep_ipython_tools.entities import Basf2CalculationQueueStatistics
 
 
-class Basf2Process(Process):
+class Basf2CalculationProcess(CalculationProcess):
 
     """
     Overload implementation of the HEPProcess with the correct handling of the path calculation.
@@ -18,8 +18,8 @@ class Basf2Process(Process):
 
         process_kwargs = {"file_name": self.log_file_name, "random_seed": self.random_seed}
 
-        super(Basf2Process, self).__init__(result_queue=result_queue, log_file_name=log_file_name,
-                                           parameters=parameters, process_kwargs=process_kwargs)
+        super(Basf2CalculationProcess, self).__init__(result_queue=result_queue, log_file_name=log_file_name,
+                                                      parameters=parameters, process_kwargs=process_kwargs)
 
     def prepare(self):
         """

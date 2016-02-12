@@ -1,6 +1,6 @@
 from hep_ipython_tools.calculation import Calculation
 
-from hep_ipython_tools.basf2.process import Basf2Process
+from hep_ipython_tools.basf2.calculation_process import Basf2CalculationProcess
 from hep_ipython_tools.basf2 import viewer
 
 
@@ -37,5 +37,5 @@ class Basf2Calculation(Calculation):
         """
         Use the Basf2Process to construct new processes.
         """
-        self.process_list.append(Basf2Process(result_queue=result_queue, log_file_name=log_file_name,
-                                              parameters=parameters, **kwargs))
+        self.process_list.append(Basf2CalculationProcess(result_queue=result_queue, log_file_name=log_file_name,
+                                                         parameters=parameters, **kwargs))
