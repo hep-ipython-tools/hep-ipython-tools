@@ -237,9 +237,9 @@ class StatisticsViewer(IPythonWidget):
 
         for column in self.statistics.columns:
             if column.three_column_format:
-                html.value += self.table_column_3_html.format(content=column.name)
+                html.value += self.table_column_3_html.format(content=column.display_name)
             else:
-                html.value += self.table_column_html.format(content=column.name)
+                html.value += self.table_column_html.format(content=column.display_name)
         html.value += "</tr></thead><tbody>"
 
         for n, module in enumerate(self.statistics.modules):
