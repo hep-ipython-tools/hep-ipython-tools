@@ -168,7 +168,7 @@ class CollectionsViewer(IPythonWidget):
     def __init__(self, collections):
         """
         Create a new collections viewer with the collections object from the process.
-        Collections must be a list (events) of StoreContents.
+        Collections must be a StoreContentList with a list of StoreContents.
         """
         #: The collections to show
         self.collections = collections
@@ -193,11 +193,11 @@ class CollectionsViewer(IPythonWidget):
         for i, event in enumerate(self.collections):
             html = widgets.HTML()
             html.value = """<table style="border-collapse: separate; border-spacing: 50px 0;">"""
-            for store_content in event:
+            for store_content in event.content:
                 html.value += self.table_row_html.format(content=store_content)
             html.value += "</table>"
             children.append(html)
-            a.set_title(i, "Event " + str(event["number"]))
+            a.set_title(i, "Event " + str(event.event_number))
 
         a.children = children
 

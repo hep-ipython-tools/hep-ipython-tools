@@ -4,6 +4,24 @@ class StoreContent:
         self.number = number
 
 
+class StoreContentList:
+    def __init__(self, content, event_number):
+        self.content = content
+        self.event_number = event_number
+
+
+class StatisticsColumn:
+    def __init__(self, name, three_column_format=False):
+        self.name = name
+        self.three_column_format = three_column_format
+
+
+class Statistics:
+    def __init__(self, columns, modules):
+        self.columns = columns
+        self.modules = modules
+
+
 class ModuleStatistics:
 
     """
