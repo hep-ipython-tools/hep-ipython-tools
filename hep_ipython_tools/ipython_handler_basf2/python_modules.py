@@ -72,7 +72,7 @@ class PrintCollections(basf2.Module):
         """
         Write the store array contents from the events to the queue.
         """
-        self.queue.put("ipython_handler_basf2.store_content", self.store_content_list)
+        self.queue.put("ipython.store_content", self.store_content_list)
 
 
 class ProgressPython(basf2.Module):

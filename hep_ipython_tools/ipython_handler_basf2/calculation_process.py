@@ -16,10 +16,8 @@ class Basf2CalculationProcess(CalculationProcess):
         #: Path to process.
         self.path = path
 
-        process_kwargs = {"file_name": self.log_file_name, "random_seed": self.random_seed}
-
         super(Basf2CalculationProcess, self).__init__(result_queue=result_queue, log_file_name=log_file_name,
-                                                      parameters=parameters, process_kwargs=process_kwargs)
+                                                      parameters=parameters, process_kwargs={})
 
     def prepare(self):
         """
@@ -47,7 +45,7 @@ class Basf2CalculationProcess(CalculationProcess):
         else:
             self.is_valid = False
 
-    def start_process(self, file_name, random_seed=None):
+    def start_process(self):
         """
         The function given to the process to start the calculation.
         Do not call by yourself.
@@ -59,14 +57,14 @@ class Basf2CalculationProcess(CalculationProcess):
             return
 
         try:
-            if random_seed is not None:
-                basf2.set_random_seed(random_seed)
+            if self.random_seed is not None:
+                basf2.set_random_seed(self.random_seed)
 
             basf2.reset_log()
             basf2.logging.zero_counters()
-            basf2.log_to_file(file_name)
+            basf2.log_to_file(self.log_file_name)
             basf2.process(self.path)
-            self.result_queue.put("ipython_handler_basf2.statistics", Basf2CalculationQueueStatistics(basf2.statistics))
+            self.result_queue.put("ipython.statistics", Basf2CalculationQueueStatistics(basf2.statistics))
         except:
             raise
         finally:

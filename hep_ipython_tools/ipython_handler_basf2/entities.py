@@ -1,3 +1,8 @@
+import numpy as np
+
+from hep_ipython_tools.entities import Statistics, StatisticsColumn
+
+
 class ModuleStatistics:
 
     """
@@ -30,8 +35,20 @@ class ModuleStatistics:
         """
         return {name: function(category) for name, category in categories}
 
+    def __getitem__(self, item):
+        if item == "name":
+            return self.name
+        elif item == "calls":
+            return self.calls["EVENT"]
+        elif item == "mem":
+            return self.memory_mean["EVENT"] * 1E-3
+        elif item == "time":
+            return np.round(self.time_sum["EVENT"] * 1E-9, 2)
+        elif item == "eventtime":
+            return np.round(self.time_mean["EVENT"] * 1E-6, 2), "&pm;", np.round(self.time_stddev["EVENT"] * 1E-6, 2)
 
-class Basf2CalculationQueueStatistics:
+
+class Basf2CalculationQueueStatistics(Statistics):
 
     """
     As the ipython_handler_basf2 statistics is not pickable, we can not store it into the queue.
@@ -48,8 +65,11 @@ class Basf2CalculationQueueStatistics:
 
     def __init__(self, statistics):
         """ Initialize with the C++ statistics """
-        #: The module statistics list
-        self.module = []
+        modules = []
+
+        columns = [StatisticsColumn("name", "Name"),
+                   StatisticsColumn("calls", "Calls"), StatisticsColumn("mem", "VMemory (MB)"),
+                   StatisticsColumn("time", "Time (s)"), StatisticsColumn("eventtime", "Time (ms)/Call", True)]
 
         categories = [("INIT", statistics.INIT),
                       ("BEGIN_RUN", statistics.BEGIN_RUN),
@@ -59,13 +79,11 @@ class Basf2CalculationQueueStatistics:
                       ("TOTAL", statistics.TOTAL)]
 
         for stats in statistics.modules:
-            self.append_module_statistics(stats, categories)
+            modules.append(ModuleStatistics(stats, categories))
 
-        self.append_module_statistics(statistics.getGlobal(), categories)
+        modules.append(ModuleStatistics(statistics.getGlobal(), categories))
 
         #: The str representation
         self.str = statistics()
 
-    def append_module_statistics(self, stats, categories):
-        """ Helper function to append modulewise stats """
-        self.module.append(ModuleStatistics(stats, categories))
+        super().__init__(columns, modules)
