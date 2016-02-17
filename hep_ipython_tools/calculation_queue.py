@@ -79,3 +79,9 @@ class CalculationQueueItem:
         self.name = name
         #: Item to store
         self.item = item
+
+    def __eq__(self, other):
+        """
+        Equality operator needed for tests.
+        """
+        return other.name == self.name and other.item == self.item
