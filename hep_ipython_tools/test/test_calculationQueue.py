@@ -1,22 +1,7 @@
-from queue import Empty
 from unittest import TestCase
-from unittest.mock import MagicMock
 
 from hep_ipython_tools.calculation_queue import CalculationQueue, CalculationQueueItem
-
-
-class MockQueue:
-    def __init__(self):
-        self.internal_storage = []
-
-    def put(self, item):
-        self.internal_storage.append(item)
-
-    def get_nowait(self):
-        try:
-            return self.internal_storage.pop(0)
-        except IndexError:
-            raise Empty
+from hep_ipython_tools.test.fixtures import MockQueue
 
 
 class A:
