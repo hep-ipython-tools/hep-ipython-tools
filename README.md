@@ -1,4 +1,6 @@
 # hep-ipython-tools
+[![Build Status](https://travis-ci.org/hep-ipython-tools/hep-ipython-tools.svg?branch=master)](https://travis-ci.org/hep-ipython-tools/hep-ipython-tools)
+
 Package with reusable ipython tools and widgets typically used for HEP experiment code.
 
 This package summerizes tools and widgets used for accessing the Belle2 software framework with ipython/jupyter. 
