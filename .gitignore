@@ -6,7 +6,7 @@ build/
 *.ipynb
 
 .cache
-.coverage*
+.coverage
 .eggs
 *.swp
 hep_ipython_tools.egg-info/
