@@ -3,13 +3,13 @@
 
 import inspect
 import time
-from abc import abstractmethod, ABCMeta
 
 from hep_ipython_tools import calculation_queue
 from hep_ipython_tools import viewer
+from hep_ipython_tools.calculation_process import CalculationProcess
 
 
-class Calculation(metaclass=ABCMeta):
+class Calculation():
 
     """
     Create a Calculation from the given Process that handles
@@ -24,6 +24,8 @@ class Calculation(metaclass=ABCMeta):
             self.process_list = process_list
         else:
             self.process_list = []
+
+        self._calculation_process_type = CalculationProcess
 
     def __iter__(self):
         """
@@ -288,12 +290,12 @@ class Calculation(metaclass=ABCMeta):
 
         return self.map_on_processes(f, index)
 
-    @abstractmethod
-    def append(self, result_queue, log_file_name, parameters, kwargs):
+    def append(self, result_queue, log_file_name, parameters, **kwargs):
         """
         Construct a new process with the given parameters and add it to the process_list.
         """
-        pass
+        self.process_list.append(self._calculation_process_type(result_queue=result_queue, log_file_name=log_file_name,
+                                                                parameters=parameters, **kwargs))
 
 
 class CalculationList:

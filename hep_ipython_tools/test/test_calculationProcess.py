@@ -28,18 +28,18 @@ class LoggingCalculationProcess(CalculationProcess):
 class TestCalculationProcess(TestCase):
     def get_terminated_process(self):
         queue = CalculationQueue()
-        process = DerivedCalculationProcess(result_queue=queue, log_file_name=None, parameters=None, process_kwargs=[])
+        process = DerivedCalculationProcess(result_queue=queue, log_file_name=None, parameters=None)
         process.start()
         process.join()
         return process
 
     def test_invalid_result_queue(self):
         self.assertRaises(ValueError, DerivedCalculationProcess, result_queue=None,
-                          log_file_name=None, parameters=None, process_kwargs=None)
+                          log_file_name=None, parameters=None)
 
     def test_default_parameters(self):
         queue = CalculationQueue()
-        process = DerivedCalculationProcess(result_queue=queue, log_file_name=None, parameters=None, process_kwargs=[])
+        process = DerivedCalculationProcess(result_queue=queue, log_file_name=None, parameters=None)
 
         self.assertFalse(process.is_alive())
         self.assertTrue(process.is_valid)
@@ -73,7 +73,7 @@ class TestLoggingCalculationProcess(TestCase):
         self.tmp_file_name = NamedTemporaryFile(delete=False).name
 
         self.process = LoggingCalculationProcess(result_queue=queue, log_file_name=self.tmp_file_name,
-                                                 parameters=None, process_kwargs=[])
+                                                 parameters=None)
 
         self.process.start()
         self.process.join()
@@ -109,7 +109,7 @@ class TestLoggingCalculationProcess(TestCase):
 class TestOngoingCalculationProcess(TestCase):
     def setUp(self):
         queue = CalculationQueue()
-        self.process = OngoingCalculationProcess(result_queue=queue, log_file_name=None, parameters=None, process_kwargs=[])
+        self.process = OngoingCalculationProcess(result_queue=queue, log_file_name=None, parameters=None)
 
     def tearDown(self):
         self.process.terminate()
@@ -127,7 +127,7 @@ class TestOngoingLoggingCalculationProcess(TestCase):
 
         queue = CalculationQueue()
         self.process = OngoingCalculationProcess(result_queue=queue, log_file_name=self.tmp_file_name,
-                                                 parameters=None, process_kwargs=[])
+                                                 parameters=None)
 
     def tearDown(self):
         self.process.terminate()

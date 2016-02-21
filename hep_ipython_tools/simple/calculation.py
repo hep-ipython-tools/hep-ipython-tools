@@ -7,12 +7,10 @@ class SimpleCalculation(Calculation):
     def __init__(self):
         super().__init__()
 
+        self._calculation_process_type = SimpleCalculationProcess
+
     def show_variable(self, index=None):
         def f(process):
             return VariableViewer(process.some_variable)
 
         self.create_widgets_for_all_processes(f, index)
-
-    def append(self, result_queue, log_file_name, parameters=None, **kwargs):
-        self.process_list.append(SimpleCalculationProcess(result_queue=result_queue, log_file_name=log_file_name,
-                                                          parameters=parameters, **kwargs))

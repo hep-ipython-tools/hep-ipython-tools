@@ -54,7 +54,7 @@ class IPythonHandler:
             result_queue = calculation_queue.CalculationQueue()
 
         calculation = self._calculation_type()
-        calculation.append(result_queue=result_queue, log_file_name=self.next_log_file_name(), **kwargs)
+        calculation.append(result_queue=result_queue, log_file_name=self.next_log_file_name(), parameters=None, **kwargs)
 
         return calculation
 
