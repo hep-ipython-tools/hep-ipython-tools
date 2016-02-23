@@ -4,12 +4,12 @@
 from multiprocessing import Queue
 
 try:
-	from queue import Empty
+    from queue import Empty
 except ImportError:
-	from Queue import Empty
+    from Queue import Empty
+
 
 class CalculationQueue:
-
     """
     This class is a wrapper around a multiprocessing.Queue
 
@@ -67,7 +67,6 @@ class CalculationQueue:
 
 
 class CalculationQueueItem:
-
     """
     A placeholder for a tuple string, object.
     Do not create them by yourself.
