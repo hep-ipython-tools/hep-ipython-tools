@@ -11,7 +11,7 @@ from hep_ipython_tools import viewer
 from hep_ipython_tools.calculation_process import CalculationProcess
 
 
-class Calculation():
+class Calculation:
 
     """
     Create a Calculation from the given Process that handles
