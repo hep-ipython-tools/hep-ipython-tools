@@ -1,7 +1,10 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
-import inspect
+try:
+    from inspect import signature
+except ImportError:
+    from funcsigs import signature
 import time
 
 from hep_ipython_tools import calculation_queue
@@ -331,7 +334,7 @@ class CalculationList:
         all_queues = [calculation_queue.CalculationQueue() for combination in every_parameter_combination_with_names]
 
         def f(q, param_combination):
-            args = inspect.signature(self.kwargs_creator_function).parameters
+            args = signature(self.kwargs_creator_function).parameters
             if "queue" in args:
                 param_combination.update({"queue": q})
 

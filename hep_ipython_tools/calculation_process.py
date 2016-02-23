@@ -1,9 +1,7 @@
 import os
-from abc import abstractmethod, ABCMeta
 from multiprocessing import Process, Pipe
 
-
-class CalculationProcess(Process, metaclass=ABCMeta):
+class CalculationProcess(Process):
     """
     Abstract base class for doing the real processing of a calculation. Is used by the handler to
     process the calculation you requested. Overload the start_process and prepare method to implement your calculation
@@ -78,7 +76,6 @@ class CalculationProcess(Process, metaclass=ABCMeta):
         if not self.is_alive():
             return self.result_queue.get_keys()
 
-    @abstractmethod
     def start_process(self):
         """
         The function given to the process to start the calculation.

@@ -3,8 +3,10 @@
 
 from multiprocessing import Queue
 
-from queue import Empty
-
+try:
+	from queue import Empty
+except ImportError:
+	from Queue import Empty
 
 class CalculationQueue:
 
