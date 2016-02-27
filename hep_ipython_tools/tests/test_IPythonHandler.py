@@ -6,7 +6,7 @@ from hep_ipython_tools.calculation import Calculation
 from hep_ipython_tools.calculation_queue import CalculationQueue
 from hep_ipython_tools.information import EnvironmentInformation
 from hep_ipython_tools.ipython_handler import IPythonHandler
-from hep_ipython_tools.test.fixtures import MockQueue
+from hep_ipython_tools.tests.fixtures import MockQueue
 
 
 class DeriviedCalculationProcess(CalculationProcess):

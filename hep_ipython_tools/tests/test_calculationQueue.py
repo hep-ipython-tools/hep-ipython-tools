@@ -1,7 +1,7 @@
 from unittest import TestCase
 
 from hep_ipython_tools.calculation_queue import CalculationQueue, CalculationQueueItem
-from hep_ipython_tools.test.fixtures import MockQueue
+from hep_ipython_tools.tests.fixtures import MockQueue
 
 
 class A:
