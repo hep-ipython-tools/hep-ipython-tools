@@ -5,7 +5,7 @@ from hep_ipython_tools.simple.viewer import VariableViewer
 
 class SimpleCalculation(Calculation):
     def __init__(self):
-        super().__init__()
+        Calculation.__init__(self)
 
         self._calculation_process_type = SimpleCalculationProcess
 
