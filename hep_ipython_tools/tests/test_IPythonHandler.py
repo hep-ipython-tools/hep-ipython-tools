@@ -11,7 +11,7 @@ from hep_ipython_tools.tests.fixtures import MockQueue
 
 class DeriviedCalculationProcess(CalculationProcess):
     def __init__(self, result_queue, log_file_name, parameters, some_variable, other_variable):
-        super().__init__(result_queue, log_file_name, parameters)
+        CalculationProcess.__init__(self, result_queue, log_file_name, parameters)
 
         self.some_variable = some_variable
         self.other_variable = other_variable
@@ -22,13 +22,13 @@ class DeriviedCalculationProcess(CalculationProcess):
 
 class DerivedCalculation(Calculation):
     def __init__(self):
-        super().__init__()
+        Calculation.__init__(self)
         self._calculation_process_type = DeriviedCalculationProcess
 
 
 class DerivedIPythonHandler(IPythonHandler):
     def __init__(self):
-        super().__init__()
+        IPythonHandler.__init__(self)
 
         self._calculation_type = DerivedCalculation
 
@@ -174,7 +174,6 @@ class TestIPythonHandler(TestCase):
                     return True
 
             self.fail()
-
 
         assert_is_in_processes(2, "ac")
         assert_is_in_processes(3, "ac")
