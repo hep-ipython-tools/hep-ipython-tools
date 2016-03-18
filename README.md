@@ -1,5 +1,6 @@
 # hep-ipython-tools
 [![Build Status](https://travis-ci.org/hep-ipython-tools/hep-ipython-tools.svg?branch=master)](https://travis-ci.org/hep-ipython-tools/hep-ipython-tools)
+[![Coverage Status](https://coveralls.io/repos/github/hep-ipython-tools/hep-ipython-tools/badge.svg?branch=master)](https://coveralls.io/github/hep-ipython-tools/hep-ipython-tools?branch=master)
 
 Package with reusable ipython tools and widgets typically used for HEP experiment code.
 
