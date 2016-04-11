@@ -1,7 +1,8 @@
+import hep_ipython_tools.calculation_list
 import os
 import tempfile
 
-from hep_ipython_tools import calculation_queue, calculation, information
+from hep_ipython_tools import calculation_queue, calculation, information, calculation_list
 
 
 class IPythonHandler:
@@ -54,47 +55,51 @@ class IPythonHandler:
             result_queue = calculation_queue.CalculationQueue()
 
         calculation = self._calculation_type()
-        calculation.append(result_queue=result_queue, log_file_name=self.next_log_file_name(), **kwargs)
+        calculation.append(result_queue=result_queue, log_file_name=self.next_log_file_name(), parameters=None, **kwargs)
 
         return calculation
 
-    def process_parameter_space(self, kwargs_creator_function, **kwargs):
+    def process_parameter_space(self, kwargs_creator_function, **parameter_lists):
         """
         Create a list of calculations by combining all parameters with all parameters you provide and
-        feeding the tuple into the kwargs_creator_function.
+        feeding the tuple into the parameter_creator_function.
         If the kwargs_creator_function has a parameter named queue, the function feeds the corresponding
-        created queue into the kwargs_creator_function.
-        The kwargs_creator_function must return a dictionary for every combination of parameters it gets,
-        which will be used to construct a Process out of it (namely, it will be fet to _generate_process).
+        created queue into the parameter_creator_function.
+        The parameter_creator_function must return a dictionary for every combination of parameters it gets,
+        which will be used to construct a process out of it.
         See ipython_handler_basf2/ipython_handler for an example.
 
         Please note that a list of calculations acts the same as a single calculation you would get from
         the process function. You can handle 10 calculations the same way you would handle a single one.
 
+        The kwargs_creator_function can transform the incoming parameters into different ones. To make this
+        more clear, the resulting dictionary created by the kwargs_creator_function is called kwargs.
+        These are the ones, that will be used to create a calculation process, so they must be compatible to the
+        calculation you chose (namely compatible with the append function of the _calculation_type).
+
         Arguments
         ---------
         kwargs_creator_function: A function with as many input parameters as parameters you provide.
            If the function has an additional queue parameter it is fed with the corresponding queue for this calculation.
-        list_of_parameters: As many lists as you want. Every list is one parameter. If you do not want a
-           specific parameter constellation to occur, you can return None in your kwargs_creator_function for
+        parameter_lists: As many lists as you want. Every list is one parameter. If you do not want a
+           specific parameter constellation to occur, you can return None in your parameter_creator_function for
            this combination.
 
         Usage
         -----
-
             def kwargs_creator_function(par_1, par_2, par_3, queue):
-                kwargs = {... par_1 ... par_2 ... par_3}
+                kwargs = {... f(par_1) ... g(par_2) ... h(par_3)}
                 queue.put(..., ...)
                 return kwargs
 
             calculations = handler.process_parameter_space(kwargs_creator_function,
-                                                           [1, 2, 3], ["x", "y", "z"], [3, 4, 5])
+                                                           par_1=[1, 2, 3], par_2=["x", "y", "z"], par_3=[3, 4, 5])
 
-        The returned kwargs must fit your _generate_process function!
+        The calculations will be created with the kwargs arguments.
         """
 
-        calculation_list = calculation.CalculationList(kwargs_creator_function, kwargs)
-        all_kwargs, all_queues, all_parameters = calculation_list.create_all_calculations()
+        all_kwargs, all_queues, all_parameters = calculation_list.create_all_calculations(kwargs_creator_function,
+                                                                                          **parameter_lists)
 
         calculations = self._calculation_type()
 

@@ -3,11 +3,13 @@
 
 from multiprocessing import Queue
 
-from queue import Empty
+try:
+    from queue import Empty
+except ImportError:
+    from Queue import Empty
 
 
 class CalculationQueue:
-
     """
     This class is a wrapper around a multiprocessing.Queue
 
@@ -65,7 +67,6 @@ class CalculationQueue:
 
 
 class CalculationQueueItem:
-
     """
     A placeholder for a tuple string, object.
     Do not create them by yourself.
@@ -79,3 +80,9 @@ class CalculationQueueItem:
         self.name = name
         #: Item to store
         self.item = item
+
+    def __eq__(self, other):
+        """
+        Equality operator needed for tests.
+        """
+        return other.name == self.name and other.item == self.item

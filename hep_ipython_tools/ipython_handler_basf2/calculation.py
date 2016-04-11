@@ -15,6 +15,8 @@ class Basf2Calculation(Calculation):
     def __init__(self):
         super().__init__()
 
+        self._calculation_process_type = Basf2CalculationProcess
+
     def show_path(self, index=None):
         """
         Show the underlaying ipython_handler_basf2 path in an interactive way
@@ -32,10 +34,3 @@ class Basf2Calculation(Calculation):
         Return the modules in the given path.
         """
         return self.map_on_processes(lambda process: process.path.modules() if process.path is not None else None, index)
-
-    def append(self, result_queue, log_file_name, parameters=None, **kwargs):
-        """
-        Use the Basf2Process to construct new processes.
-        """
-        self.process_list.append(Basf2CalculationProcess(result_queue=result_queue, log_file_name=log_file_name,
-                                                         parameters=parameters, **kwargs))

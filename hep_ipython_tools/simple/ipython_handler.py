@@ -5,7 +5,7 @@ from hep_ipython_tools.ipython_handler import IPythonHandler
 
 class SimpleIPythonHandler(IPythonHandler):
     def __init__(self):
-        super().__init__()
+        IPythonHandler.__init__(self)
 
         #: A shortcut for returning information on the environment.
         self.information = SimpleInformation()

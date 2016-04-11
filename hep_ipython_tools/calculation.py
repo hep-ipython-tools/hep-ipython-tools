@@ -1,15 +1,17 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
-import inspect
+try:
+    from inspect import signature
+except ImportError:
+    from funcsigs import signature
 import time
-from abc import abstractmethod, ABCMeta
 
-from hep_ipython_tools import calculation_queue
 from hep_ipython_tools import viewer
+from hep_ipython_tools.calculation_process import CalculationProcess
 
 
-class Calculation(metaclass=ABCMeta):
+class Calculation:
 
     """
     Create a Calculation from the given Process that handles
@@ -24,6 +26,8 @@ class Calculation(metaclass=ABCMeta):
             self.process_list = process_list
         else:
             self.process_list = []
+
+        self._calculation_process_type = CalculationProcess
 
     def __iter__(self):
         """
@@ -288,53 +292,11 @@ class Calculation(metaclass=ABCMeta):
 
         return self.map_on_processes(f, index)
 
-    @abstractmethod
-    def append(self, result_queue, log_file_name, parameters, kwargs):
+    def append(self, result_queue, log_file_name, parameters, **kwargs):
         """
         Construct a new process with the given parameters and add it to the process_list.
         """
-        pass
+        self.process_list.append(self._calculation_process_type(result_queue=result_queue, log_file_name=log_file_name,
+                                                                parameters=parameters, **kwargs))
 
 
-class CalculationList:
-
-    """
-    Creates a whole list of calculations by combining every list element in every list in lists with every other
-    list in lists.
-    """
-
-    def __init__(self, kwargs_creator_function, lists):
-        """ Init with the kwargs_creator_function and the lists of named parameters """
-
-        #: The creator function
-        self.kwargs_creator_function = kwargs_creator_function
-
-        #: The lists of parameters
-        self.lists = lists
-
-    def create_all_calculations(self):
-        """
-        Create all calculations.
-        """
-        import itertools
-
-        parameter_names_in_list = list(self.lists.keys())
-        parameter_values_in_list = list(self.lists.values())
-
-        every_parameter_combination = itertools.product(*parameter_values_in_list)
-
-        every_parameter_combination_with_names = [{parameter_name: parameter_value for parameter_name, parameter_value in zip(
-            parameter_names_in_list, parameter_values)} for parameter_values in list(every_parameter_combination)]
-
-        all_queues = [calculation_queue.CalculationQueue() for combination in every_parameter_combination_with_names]
-
-        def f(q, param_combination):
-            args = inspect.signature(self.kwargs_creator_function).parameters
-            if "queue" in args:
-                param_combination.update({"queue": q})
-
-            return self.kwargs_creator_function(**param_combination)
-
-        all_calculations = [f(q, parameter_combination)
-                            for q, parameter_combination in zip(all_queues, list(every_parameter_combination_with_names))]
-        return all_calculations, all_queues, list(every_parameter_combination_with_names)

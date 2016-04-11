@@ -4,14 +4,14 @@ from hep_ipython_tools.entities import StoreContent, StoreContentList, Statistic
 
 
 class SimpleCalculationProcess(CalculationProcess):
-    def __init__(self, some_variable, result_queue, log_file_name, parameters=None, **kwargs):
+    def __init__(self, result_queue, log_file_name, parameters, some_variable):
         #: Some needed variable
         self.some_variable = some_variable
 
         super(SimpleCalculationProcess, self).__init__(result_queue=result_queue, log_file_name=log_file_name,
-                                                       parameters=parameters, process_kwargs={"file_name": log_file_name})
+                                                       parameters=parameters)
 
-    def start_process(self, file_name):
+    def start_process(self):
         self.progress_queue_remote.send("start")
 
         store_content_list = []
@@ -28,7 +28,7 @@ class SimpleCalculationProcess(CalculationProcess):
             module_statistics.append(self.get_statistics(i))
 
         # Mock results
-        self.mock_log(file_name)
+        self.mock_log(self.log_file_name)
         self.result_queue.put("ipython.statistics", self.mock_statistics(module_statistics))
         self.result_queue.put("ipython.store_content", self.mock_content(store_content_list))
 

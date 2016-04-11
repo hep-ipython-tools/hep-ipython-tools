@@ -43,8 +43,8 @@ class EnvironmentInformation:
         A nice representation.
         """
         result = ""
-        result += "externals_version: " + self.externals_version + "\n"
-        result += "externals_option: " + self.externals_option + "\n"
+        result += "externals version: " + self.externals_version + "\n"
+        result += "externals option: " + self.externals_option + "\n"
         result += "option: " + self.option + "\n"
         result += "architecture: " + self.architecture + "\n"
         result += "release: " + self.release + "\n"

@@ -2,6 +2,13 @@
 *.pyc
 *~
 
-
 build/
 *.ipynb
+
+.cache
+.coverage
+.eggs
+*.swp
+hep_ipython_tools.egg-info/
+
+.tox

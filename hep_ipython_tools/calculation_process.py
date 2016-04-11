@@ -1,9 +1,7 @@
 import os
-from abc import abstractmethod, ABCMeta
 from multiprocessing import Process, Pipe
 
-
-class CalculationProcess(Process, metaclass=ABCMeta):
+class CalculationProcess(Process):
     """
     Abstract base class for doing the real processing of a calculation. Is used by the handler to
     process the calculation you requested. Overload the start_process and prepare method to implement your calculation
@@ -11,7 +9,7 @@ class CalculationProcess(Process, metaclass=ABCMeta):
 
     See ipython_handler_basf2/calculation_process.py for an example implementation.
     """
-    def __init__(self, result_queue, log_file_name, parameters, process_kwargs, **kwargs):
+    def __init__(self, result_queue, log_file_name, parameters):
         if result_queue is None:
             raise ValueError("Invalid result_queue")
 
@@ -40,7 +38,7 @@ class CalculationProcess(Process, metaclass=ABCMeta):
         self.prepare()
 
         # Call the constructor of the base class.
-        Process.__init__(self, target=self.start_process, kwargs=process_kwargs, **kwargs)
+        Process.__init__(self, target=self.start_process)
 
     def save_log(self):
         """
@@ -78,8 +76,7 @@ class CalculationProcess(Process, metaclass=ABCMeta):
         if not self.is_alive():
             return self.result_queue.get_keys()
 
-    @abstractmethod
-    def start_process(self, **kwargs):
+    def start_process(self):
         """
         The function given to the process to start the calculation.
         Do not call by yourself.
