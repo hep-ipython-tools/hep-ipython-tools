@@ -4,6 +4,7 @@ from hep_ipython_tools.simple.viewer import VariableViewer
 
 
 class SimpleCalculation(Calculation):
+
     def __init__(self):
         Calculation.__init__(self)
 

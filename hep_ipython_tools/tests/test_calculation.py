@@ -5,6 +5,7 @@ from hep_ipython_tools.calculation_queue import CalculationQueue
 
 
 class TestCalculation(TestCase):
+
     def test_default(self):
         calculation = Calculation()
 

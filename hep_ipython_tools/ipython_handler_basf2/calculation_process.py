@@ -10,6 +10,7 @@ class Basf2CalculationProcess(CalculationProcess):
     """
     Overload implementation of the HEPProcess with the correct handling of the path calculation.
     """
+
     def __init__(self, result_queue, log_file_name, parameters, path, random_seed=None):
         #: Random seed to set. None will not set it.
         self.random_seed = random_seed

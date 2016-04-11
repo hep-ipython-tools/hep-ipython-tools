@@ -1,6 +1,7 @@
 import os
 from multiprocessing import Process, Pipe
 
+
 class CalculationProcess(Process):
     """
     Abstract base class for doing the real processing of a calculation. Is used by the handler to
@@ -9,6 +10,7 @@ class CalculationProcess(Process):
 
     See ipython_handler_basf2/calculation_process.py for an example implementation.
     """
+
     def __init__(self, result_queue, log_file_name, parameters):
         if result_queue is None:
             raise ValueError("Invalid result_queue")

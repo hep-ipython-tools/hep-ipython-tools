@@ -4,6 +4,7 @@ from hep_ipython_tools.entities import StoreContent, StoreContentList, Statistic
 
 
 class SimpleCalculationProcess(CalculationProcess):
+
     def __init__(self, result_queue, log_file_name, parameters, some_variable):
         #: Some needed variable
         self.some_variable = some_variable

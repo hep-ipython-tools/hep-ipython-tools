@@ -4,6 +4,7 @@ from hep_ipython_tools.ipython_handler import IPythonHandler
 
 
 class SimpleIPythonHandler(IPythonHandler):
+
     def __init__(self):
         IPythonHandler.__init__(self)
 

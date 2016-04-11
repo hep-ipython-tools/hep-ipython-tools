@@ -8,24 +8,28 @@ from tempfile import NamedTemporaryFile
 
 
 class DerivedCalculationProcess(CalculationProcess):
+
     def start_process(self, **kwargs):
         self.result_queue.put("TestItem", "TestValue")
         self.result_queue.put("AnotherTestItem", "AnotherTestValue")
 
 
 class OngoingCalculationProcess(CalculationProcess):
+
     def start_process(self, **kwargs):
         while True:
             sleep(1)
 
 
 class LoggingCalculationProcess(CalculationProcess):
+
     def start_process(self, **kwargs):
         with open(self.log_file_name, "w") as f:
             f.write("Log File Content")
 
 
 class TestCalculationProcess(TestCase):
+
     def get_terminated_process(self):
         queue = CalculationQueue()
         process = DerivedCalculationProcess(result_queue=queue, log_file_name=None, parameters=None)
@@ -67,6 +71,7 @@ class TestCalculationProcess(TestCase):
 
 
 class TestLoggingCalculationProcess(TestCase):
+
     def setUp(self):
         queue = CalculationQueue()
 
@@ -107,6 +112,7 @@ class TestLoggingCalculationProcess(TestCase):
 
 
 class TestOngoingCalculationProcess(TestCase):
+
     def setUp(self):
         queue = CalculationQueue()
         self.process = OngoingCalculationProcess(result_queue=queue, log_file_name=None, parameters=None)
@@ -122,6 +128,7 @@ class TestOngoingCalculationProcess(TestCase):
 
 
 class TestOngoingLoggingCalculationProcess(TestCase):
+
     def setUp(self):
         self.tmp_file_name = NamedTemporaryFile(delete=False).name
 

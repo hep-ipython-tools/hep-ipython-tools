@@ -2,6 +2,7 @@ from hep_ipython_tools.information import EnvironmentInformation
 
 
 class SimpleInformation(EnvironmentInformation):
+
     def __init__(self):
         EnvironmentInformation.__init__(self)
 

@@ -2,6 +2,7 @@ class StoreContent:
     """
     Data class for an entry in a store content list.
     """
+
     def __init__(self, name, number):
         """
         Create a new entry in a Store Content List.
@@ -18,6 +19,7 @@ class StoreContentList:
     """
     Data class for the content of the storage for one event.
     """
+
     def __init__(self, content, event_number):
         """
         Create a new content fr one event.
@@ -34,6 +36,7 @@ class StatisticsColumn:
     """
     Data class for a column in the statistics view.
     """
+
     def __init__(self, name, display_name=None, three_column_format=False):
         """
         Create a new column for the statistics view.
@@ -58,6 +61,7 @@ class Statistics:
     """
     Data class for the statistics.
     """
+
     def __init__(self, columns, modules):
         """
         Create a new Statistics object.
@@ -68,5 +72,3 @@ class Statistics:
         self.columns = columns
         #: A list of dictionaries, each one with the same names as there are columns.
         self.modules = modules
-
-

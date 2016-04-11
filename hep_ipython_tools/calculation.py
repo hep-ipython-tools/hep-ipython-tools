@@ -298,5 +298,3 @@ class Calculation:
         """
         self.process_list.append(self._calculation_process_type(result_queue=result_queue, log_file_name=log_file_name,
                                                                 parameters=parameters, **kwargs))
-
-

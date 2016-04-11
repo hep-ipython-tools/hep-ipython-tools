@@ -2,6 +2,7 @@ from hep_ipython_tools.viewer import IPythonWidget
 
 
 class VariableViewer(IPythonWidget):
+
     def __init__(self, some_variable):
         self.some_variable = some_variable
 

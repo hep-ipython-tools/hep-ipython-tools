@@ -5,6 +5,7 @@ except ImportError:
 
 
 class MockQueue:
+
     def __init__(self):
         self.internal_storage = []
 

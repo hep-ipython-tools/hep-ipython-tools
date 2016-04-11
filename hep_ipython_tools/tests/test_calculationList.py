@@ -3,6 +3,7 @@ from hep_ipython_tools.calculation_list import create_every_parameter_combinatio
 
 
 class TestCalculationList(TestCase):
+
     def test_create_every_parameter_combination(self):
 
         parameter_names = ["A", "B", "C"]
@@ -28,7 +29,7 @@ class TestCalculationList(TestCase):
 
     def test_create_all_calculations_no_queue(self):
         def creator_function(x, y):
-            return {"a": 2*x, "b": y+1}
+            return {"a": 2 * x, "b": y + 1}
 
         all_calculation_kwargs, all_queues, every_parameter_combination = create_all_calculations(creator_function,
                                                                                                   x=[1, 2], y=[3, 4])
@@ -50,11 +51,11 @@ class TestCalculationList(TestCase):
             index = every_parameter_combination.index(combination)
             x = combination["x"]
             y = combination["y"]
-            self.assertEqual(all_calculation_kwargs[index], {"a": 2*x, "b": y+1})
+            self.assertEqual(all_calculation_kwargs[index], {"a": 2 * x, "b": y + 1})
 
     def test_create_all_calculations_queue(self):
         def creator_function(x, y, queue):
-            return {"a": 2*x, "b": y+1, "queue": queue}
+            return {"a": 2 * x, "b": y + 1, "queue": queue}
 
         all_calculation_kwargs, all_queues, every_parameter_combination = create_all_calculations(creator_function,
                                                                                                   x=[1, 2], y=[3, 4])
@@ -76,13 +77,13 @@ class TestCalculationList(TestCase):
             index = every_parameter_combination.index(combination)
             x = combination["x"]
             y = combination["y"]
-            self.assertEqual(all_calculation_kwargs[index], {"a": 2*x, "b": y+1, "queue": all_queues[index]})
+            self.assertEqual(all_calculation_kwargs[index], {"a": 2 * x, "b": y + 1, "queue": all_queues[index]})
 
     def test_create_all_calculations_none(self):
         def creator_function(x, y):
             if x > 1:
                 return None
-            return {"a": 2*x, "b": y+1}
+            return {"a": 2 * x, "b": y + 1}
 
         all_calculation_kwargs, all_queues, every_parameter_combination = create_all_calculations(creator_function,
                                                                                                   x=[1, 2], y=[3, 4])
@@ -105,9 +106,6 @@ class TestCalculationList(TestCase):
             y = combination["y"]
 
             if x == 1:
-                self.assertEqual(all_calculation_kwargs[index], {"a": 2*x, "b": y+1})
+                self.assertEqual(all_calculation_kwargs[index], {"a": 2 * x, "b": y + 1})
             else:
                 self.assertEqual(all_calculation_kwargs[index], None)
-
-
-

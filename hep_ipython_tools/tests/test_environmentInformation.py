@@ -1,8 +1,8 @@
 from unittest import TestCase
 try:
-	from unittest.mock import patch, MagicMock
+    from unittest.mock import patch, MagicMock
 except ImportError:
-	from mock import patch, MagicMock
+    from mock import patch, MagicMock
 
 import datetime
 
@@ -15,7 +15,7 @@ class TestEnvironmentInformation(TestCase):
         self.patch = patch("hep_ipython_tools.information.datetime")
         datetime_patch = self.patch.start()
 
-        datetime_patch.now = MagicMock(return_value = datetime.datetime(1999, 11, 12))
+        datetime_patch.now = MagicMock(return_value=datetime.datetime(1999, 11, 12))
 
         self.information = EnvironmentInformation()
 
@@ -56,7 +56,7 @@ class TestEnvironmentInformation(TestCase):
 
     def test_new_revision(self):
 
-        self.information.get_current_revision_number = MagicMock(return_value = "OtherRevision")
+        self.information.get_current_revision_number = MagicMock(return_value="OtherRevision")
 
         self.assertEqual(self.information.revision_number, "OtherRevision")
 

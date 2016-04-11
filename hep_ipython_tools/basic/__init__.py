@@ -7,6 +7,7 @@ class BasicCalculationProcess(CalculationProcess):
     """
     Overload this class and implement how a calculation should be done in your framework.
     """
+
     def __init__(self, result_queue, log_file_name, parameters, another_variable):
         """
         Define all other variables you need for your calculation process here.
@@ -60,6 +61,7 @@ class BasicCalculation(Calculation):
     However, if you want the user to be able to access more information than the basic ones (e.g. your
     customized viewer objects), you can add the methods here. See simple/calculation.py for an example.
     """
+
     def __init__(self):
         """
         We do nothing more than calling the base constructor and setting the _calculation_process_type
@@ -79,6 +81,7 @@ class BasicIPythonHandler(IPythonHandler):
     or information printer functions.
     See simple/ipython_handler.py or ipython_handler_basf2/ipython_handler.py for examples.
     """
+
     def __init__(self):
         IPythonHandler.__init__(self)
 

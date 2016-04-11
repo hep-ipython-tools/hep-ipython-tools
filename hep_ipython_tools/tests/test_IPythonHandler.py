@@ -10,6 +10,7 @@ from hep_ipython_tools.tests.fixtures import MockQueue
 
 
 class DeriviedCalculationProcess(CalculationProcess):
+
     def __init__(self, result_queue, log_file_name, parameters, some_variable, other_variable):
         CalculationProcess.__init__(self, result_queue, log_file_name, parameters)
 
@@ -21,12 +22,14 @@ class DeriviedCalculationProcess(CalculationProcess):
 
 
 class DerivedCalculation(Calculation):
+
     def __init__(self):
         Calculation.__init__(self)
         self._calculation_process_type = DeriviedCalculationProcess
 
 
 class DerivedIPythonHandler(IPythonHandler):
+
     def __init__(self):
         IPythonHandler.__init__(self)
 
@@ -34,6 +37,7 @@ class DerivedIPythonHandler(IPythonHandler):
 
 
 class TestIPythonHandler(TestCase):
+
     def test_default(self):
         handler = IPythonHandler()
 
