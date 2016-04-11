@@ -44,7 +44,7 @@ class Basf2IPythonHandler(IPythonHandler):
         """
         Shortcut for convenience.
         """
-        IPythonHandler.process(self, result_queue=result_queue, path=path)
+        return IPythonHandler.process(self, result_queue=result_queue, path=path)
 
     @staticmethod
     def style():
