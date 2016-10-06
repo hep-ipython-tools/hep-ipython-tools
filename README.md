@@ -17,4 +17,4 @@ or
 
     pip install git+https://github.com/hep-ipython-tools/hep-ipython-tools.git
     
-For more information, please have a look on [http://hep-ipython-tools.github.io/][http://hep-ipython-tools.github.io/].
+For more information, please have a look on [http://hep-ipython-tools.github.io/](http://hep-ipython-tools.github.io/).
