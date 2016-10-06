@@ -6,6 +6,8 @@
 Welcome to hep_ipython_tools' documentation!
 ============================================
 
+This documentation is currently under construction!
+
 Contents:
 
 .. toctree::
