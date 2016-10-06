@@ -1,5 +1,3 @@
-import numpy as np
-
 from hep_ipython_tools.entities import Statistics, StatisticsColumn
 
 
@@ -43,9 +41,9 @@ class ModuleStatistics:
         elif item == "mem":
             return self.memory_mean["EVENT"] * 1E-3
         elif item == "time":
-            return np.round(self.time_sum["EVENT"] * 1E-9, 2)
+            return round(self.time_sum["EVENT"] * 1E-9, 2)
         elif item == "eventtime":
-            return np.round(self.time_mean["EVENT"] * 1E-6, 2), "&pm;", np.round(self.time_stddev["EVENT"] * 1E-6, 2)
+            return round(self.time_mean["EVENT"] * 1E-6, 2), "&pm;", round(self.time_stddev["EVENT"] * 1E-6, 2)
 
 
 class Basf2CalculationQueueStatistics(Statistics):
