@@ -10,7 +10,7 @@ classes. For a simple example, see `simple`; for a more advanced setup see `ipyt
 
 Setup with 
 
-    git checkout https://github.com/hep-ipython-tools/hep-ipython-tools.git
+    git clone https://github.com/hep-ipython-tools/hep-ipython-tools.git
     python setup.py install
   
 or
