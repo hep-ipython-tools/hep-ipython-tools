@@ -1,14 +1,21 @@
+# Editor files
 .idea
 *.pyc
 *~
+*.swp
 
-build/
+# No notebooks in this repository
 *.ipynb
 
+# Build/Test residuals
 .cache
 .coverage
 .eggs
-*.swp
 hep_ipython_tools.egg-info/
+build/
 
+# TOX test
 .tox
+
+# Documentation
+docs/_build
