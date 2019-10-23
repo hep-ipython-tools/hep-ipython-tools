@@ -22,7 +22,7 @@ class BasicCalculationProcess(CalculationProcess):
         You can use it to prepare your process before start is actually
         called (maybe to check the validity of the variables before
         start_process is called). For example, you can set the self.is_valid parameter
-        to False to indicate that tis particular process will not be processed.
+        to False to indicate that this particular process will not be processed.
         """
         self.another_variable = another_variable
 
